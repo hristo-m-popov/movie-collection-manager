@@ -5,19 +5,17 @@ import javax.swing.*;
 public class MainFrame extends JFrame {
 
     public MainFrame() {
-        // Заглавие на прозореца
         setTitle("Movie Collection Manager");
         
-        // Размер на прозореца
-        setSize(900, 600);
+        setSize(950, 600);
         
-        // Затвори програмата когато се затвори прозореца
+        // EXIT_ON_CLOSE - затвори цялата програма
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        // Центрирай прозореца на екрана
+        // центрира прозореца на екрана - null означава спрямо целия екран
         setLocationRelativeTo(null);
 
-        // JTabbedPane = компонент с табове (като табове в браузър)
+        // компонент с табове
         JTabbedPane tabs = new JTabbedPane();
         
         GenrePanel genrePanel = new GenrePanel();
@@ -26,20 +24,23 @@ public class MainFrame extends JFrame {
         ReviewPanel reviewPanel = new ReviewPanel();
         SearchPanel searchPanel = new SearchPanel();
         
-        // Добавяме таб за всяка таблица
+        // добавамя табовете
         tabs.addTab("Жанрове", genrePanel);
         tabs.addTab("Режисьори", directorPanel);
         tabs.addTab("Филми", moviePanel);
         tabs.addTab("Ревюта", reviewPanel);
         tabs.addTab("Търсене", searchPanel);
         
+        // слушател за събития
+        // активира се всеки път когато user-a превключи към друг таб
+        // ако да, обновяваме падащите менюта с жанрове и режисьори
         tabs.addChangeListener(e -> {
             if (tabs.getSelectedComponent() == moviePanel) {
                 moviePanel.refreshCombos();
             }
         });
-
-        // Добавяме табовете към прозореца
+        
+        // добавяме компонента tabs в прозореца
         add(tabs);
     }
 }

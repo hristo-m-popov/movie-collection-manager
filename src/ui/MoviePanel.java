@@ -41,7 +41,6 @@ public class MoviePanel extends JPanel {
         // --- ДОЛНА ЧАСТ ---
         JPanel bottomPanel = new JPanel(new GridLayout(4, 1));
 
-        // Ред за търсене
         JPanel searchPanel = new JPanel();
         searchField = new JTextField(20);
         JButton searchBtn = new JButton("Търси");
@@ -51,7 +50,6 @@ public class MoviePanel extends JPanel {
         searchPanel.add(searchBtn);
         searchPanel.add(showAllBtn);
 
-        // Ред за добавяне
         JPanel insertPanel = new JPanel();
         JTextField titleField = new JTextField(10);
         JTextField yearField = new JTextField(4);
@@ -71,7 +69,6 @@ public class MoviePanel extends JPanel {
         insertPanel.add(directorCombo);
         insertPanel.add(insertBtn);
 
-        // Ред за редактиране
         JPanel editPanel = new JPanel();
         JTextField editTitleField = new JTextField(10);
         JTextField editYearField = new JTextField(4);
@@ -91,7 +88,6 @@ public class MoviePanel extends JPanel {
         editPanel.add(editDirectorCombo);
         editPanel.add(updateBtn);
 
-        // Ред за изтриване
         JPanel deletePanel = new JPanel();
         JButton deleteBtn = new JButton("Изтрий избрания филм");
         deletePanel.add(deleteBtn);
@@ -102,16 +98,13 @@ public class MoviePanel extends JPanel {
         bottomPanel.add(deletePanel);
         add(bottomPanel, BorderLayout.SOUTH);
 
-        // Зареди жанровете и режисьорите в падащите менюта
         loadCombos(genreCombo, directorCombo);
         loadCombos(editGenreCombo, editDirectorCombo);
 
         // --- БУТОНИ ---
 
-        // Покажи всички
         showAllBtn.addActionListener(e -> loadData());
 
-        // Търсене
         searchBtn.addActionListener(e -> {
             String keyword = searchField.getText().trim();
             if (keyword.isEmpty()) {
@@ -132,7 +125,6 @@ public class MoviePanel extends JPanel {
             }
         });
 
-        // Добави
         insertBtn.addActionListener(e -> {
             try {
             	loadCombos(genreCombo, directorCombo);
@@ -158,7 +150,6 @@ public class MoviePanel extends JPanel {
             }
         });
 
-        // Редактирай
         updateBtn.addActionListener(e -> {
             int selectedRow = table.getSelectedRow();
             if (selectedRow == -1) {
@@ -185,7 +176,6 @@ public class MoviePanel extends JPanel {
             }
         });
 
-        // Изтрий
         deleteBtn.addActionListener(e -> {
             int selectedRow = table.getSelectedRow();
             if (selectedRow == -1) {
@@ -205,7 +195,6 @@ public class MoviePanel extends JPanel {
         loadData();    
       }
 
-    // Зарежда жанровете и режисьорите в падащите менюта
     private void loadCombos(JComboBox<String> gCombo, JComboBox<String> dCombo) {
         genreList = genreDAO.getAll();
         directorList = directorDAO.getAll();
@@ -215,7 +204,6 @@ public class MoviePanel extends JPanel {
         for (Director d : directorList) dCombo.addItem(d.getName());
     }
 
-    // Връща името на жанра по ID
     private String getGenreName(int genreId) {
         for (Genre g : genreList) {
             if (g.getGenreId() == genreId) return g.getName();
@@ -223,7 +211,6 @@ public class MoviePanel extends JPanel {
         return "Неизвестен";
     }
 
-    // Връща името на режисьора по ID
     private String getDirectorName(int directorId) {
         for (Director d : directorList) {
             if (d.getDirectorId() == directorId) return d.getName();

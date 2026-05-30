@@ -9,7 +9,6 @@ import java.util.List;
 
 public class GenreDAO {
 
-    // Взима всички жанрове от базата данни
     public List<Genre> getAll() {
         List<Genre> genres = new ArrayList<>();
         try (Connection conn = DBConnection.getConnection();
@@ -28,7 +27,7 @@ public class GenreDAO {
         return genres;
     }
 
-    // Добавя нов жанр
+    // ? - placeholder за sql injection
     public void insert(String name) {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
@@ -41,7 +40,6 @@ public class GenreDAO {
         }
     }
 
-    // Променя името на жанр
     public void update(int genreId, String newName) {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
@@ -55,7 +53,6 @@ public class GenreDAO {
         }
     }
 
-    // Изтрива жанр по ID
     public void delete(int genreId) {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
@@ -68,13 +65,13 @@ public class GenreDAO {
         }
     }
 
-    // Търси жанр по име
     public List<Genre> searchByName(String name) {
         List<Genre> genres = new ArrayList<>();
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
                 "SELECT * FROM genres WHERE name LIKE ?")) {
 
+        	// % означава каквото и да е, търси навсякъде в текста
             stmt.setString(1, "%" + name + "%");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {

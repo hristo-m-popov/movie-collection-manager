@@ -53,17 +53,14 @@ public class SearchPanel extends JPanel {
 
         add(searchPanel, BorderLayout.NORTH);
 
-        // Зареди жанровете и режисьорите
         loadCombos();
 
         // --- БУТОНИ ---
 
-        // Търси
         searchBtn.addActionListener(e -> {
             int genreId = genreList.get(genreCombo.getSelectedIndex()).getGenreId();
             int directorId = directorList.get(directorCombo.getSelectedIndex()).getDirectorId();
 
-            // Взима всички филми и филтрира по жанр И режисьор
             List<Movie> results = movieDAO.getAll().stream()
                 .filter(m -> m.getGenreId() == genreId && m.getDirectorId() == directorId)
                 .collect(Collectors.toList());
@@ -87,7 +84,6 @@ public class SearchPanel extends JPanel {
             }
         });
 
-        // Изчисти
         clearBtn.addActionListener(e -> tableModel.setRowCount(0));
     }
 

@@ -9,6 +9,7 @@ public class Genre {
 		this.name = name;
 	}
 	
+	// енкапсулация
 	//getters
 	public int getGenreId() {return genreId;}
 	public String getName() {return name;}

@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ReviewDAO {
 
-    // Взима всички ревюта от базата данни
     public List<Review> getAll() {
         List<Review> reviews = new ArrayList<>();
         try (Connection conn = DBConnection.getConnection();
@@ -31,7 +30,6 @@ public class ReviewDAO {
         return reviews;
     }
 
-    // Добавя ново ревю
     public void insert(int movieId, String reviewText, double userRating, Date watchDate) {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
@@ -47,7 +45,6 @@ public class ReviewDAO {
         }
     }
 
-    // Променя ревю
     public void update(int reviewId, String reviewText, double userRating, Date watchDate) {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
@@ -63,7 +60,6 @@ public class ReviewDAO {
         }
     }
 
-    // Изтрива ревю по ID
     public void delete(int reviewId) {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
@@ -76,7 +72,6 @@ public class ReviewDAO {
         }
     }
 
-    // Взима всички ревюта за конкретен филм
     public List<Review> getByMovieId(int movieId) {
         List<Review> reviews = new ArrayList<>();
         try (Connection conn = DBConnection.getConnection();

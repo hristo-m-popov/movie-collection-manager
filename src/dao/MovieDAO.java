@@ -9,7 +9,6 @@ import java.util.List;
 
 public class MovieDAO {
 
-    // Взима всички филми от базата данни
     public List<Movie> getAll() {
         List<Movie> movies = new ArrayList<>();
         try (Connection conn = DBConnection.getConnection();
@@ -32,7 +31,6 @@ public class MovieDAO {
         return movies;
     }
 
-    // Добавя нов филм
     public void insert(String title, int releaseYear, double rating, int genreId, int directorId) {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
@@ -49,7 +47,6 @@ public class MovieDAO {
         }
     }
 
-    // Променя филм
     public void update(int movieId, String title, int releaseYear, double rating, int genreId, int directorId) {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
@@ -67,7 +64,6 @@ public class MovieDAO {
         }
     }
 
-    // Изтрива филм по ID
     public void delete(int movieId) {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
@@ -80,7 +76,6 @@ public class MovieDAO {
         }
     }
 
-    // Търси филм по заглавие
     public List<Movie> searchByTitle(String title) {
         List<Movie> movies = new ArrayList<>();
         try (Connection conn = DBConnection.getConnection();

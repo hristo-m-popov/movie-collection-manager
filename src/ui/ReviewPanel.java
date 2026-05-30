@@ -33,7 +33,6 @@ public class ReviewPanel extends JPanel {
         // --- ДОЛНА ЧАСТ ---
         JPanel bottomPanel = new JPanel(new GridLayout(4, 1));
 
-        // Ред за филтриране по филм
         JPanel filterPanel = new JPanel();
         movieCombo = new JComboBox<>();
         JButton filterBtn = new JButton("Покажи ревютата за филма");
@@ -43,7 +42,6 @@ public class ReviewPanel extends JPanel {
         filterPanel.add(filterBtn);
         filterPanel.add(showAllBtn);
 
-        // Ред за добавяне
         JPanel insertPanel = new JPanel();
         JComboBox<String> insertMovieCombo = new JComboBox<>();
         JTextField reviewField = new JTextField(15);
@@ -60,7 +58,6 @@ public class ReviewPanel extends JPanel {
         insertPanel.add(dateField);
         insertPanel.add(insertBtn);
 
-        // Ред за редактиране
         JPanel editPanel = new JPanel();
         JTextField editReviewField = new JTextField(15);
         JTextField editRatingField = new JTextField(4);
@@ -74,7 +71,6 @@ public class ReviewPanel extends JPanel {
         editPanel.add(editDateField);
         editPanel.add(updateBtn);
 
-        // Ред за изтриване
         JPanel deletePanel = new JPanel();
         JButton deleteBtn = new JButton("Изтрий избраното ревю");
         deletePanel.add(deleteBtn);
@@ -85,15 +81,12 @@ public class ReviewPanel extends JPanel {
         bottomPanel.add(deletePanel);
         add(bottomPanel, BorderLayout.SOUTH);
 
-        // Зареди филмите в падащите менюта
         loadMovieCombos(movieCombo, insertMovieCombo);
 
         // --- БУТОНИ ---
 
-        // Покажи всички
         showAllBtn.addActionListener(e -> loadData());
 
-        // Филтрирай по филм
         filterBtn.addActionListener(e -> {
             int movieId = movieList.get(movieCombo.getSelectedIndex()).getMovieId();
             List<Review> results = reviewDAO.getByMovieId(movieId);
@@ -109,7 +102,6 @@ public class ReviewPanel extends JPanel {
             }
         });
 
-        // Добави
         insertBtn.addActionListener(e -> {
             try {
                 int movieId = movieList.get(insertMovieCombo.getSelectedIndex()).getMovieId();
@@ -134,7 +126,6 @@ public class ReviewPanel extends JPanel {
             }
         });
 
-        // Редактирай
         updateBtn.addActionListener(e -> {
             int selectedRow = table.getSelectedRow();
             if (selectedRow == -1) {
@@ -161,7 +152,6 @@ public class ReviewPanel extends JPanel {
             }
         });
 
-        // Изтрий
         deleteBtn.addActionListener(e -> {
             int selectedRow = table.getSelectedRow();
             if (selectedRow == -1) {

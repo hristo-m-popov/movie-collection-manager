@@ -15,20 +15,26 @@ public class GenrePanel extends JPanel {
     private JTable table;
     private JTextField searchField;
 
+    // конструктурът
     public GenrePanel() {
+    	// 5 зони
         setLayout(new BorderLayout());
-
+        
         // --- ТАБЛИЦА ---
+        // заглавията на колоните
         tableModel = new DefaultTableModel(new String[]{"ID", "Име"}, 0);
+        // създаваме визуалната таблица и я свързваме с модела
         table = new JTable(tableModel);
+        // тези три реда заедно скриват колоната напълно. тя все още съществува в модела но не се вижда на екрана
         table.getColumnModel().getColumn(0).setMinWidth(0);
         table.getColumnModel().getColumn(0).setMaxWidth(0);
         table.getColumnModel().getColumn(0).setWidth(0);
+        // добавяме таблицата към панела
         add(new JScrollPane(table), BorderLayout.CENTER);
+        
         // --- ДОЛНА ЧАСТ ---
         JPanel bottomPanel = new JPanel(new GridLayout(3, 1));
 
-        // Ред за търсене
         JPanel searchPanel = new JPanel();
         searchField = new JTextField(20);
         JButton searchBtn = new JButton("Търси");
@@ -38,7 +44,6 @@ public class GenrePanel extends JPanel {
         searchPanel.add(searchBtn);
         searchPanel.add(showAllBtn);
 
-        // Ред за добавяне
         JPanel insertPanel = new JPanel();
         JTextField nameField = new JTextField(20);
         JButton insertBtn = new JButton("Добави");
@@ -46,7 +51,6 @@ public class GenrePanel extends JPanel {
         insertPanel.add(nameField);
         insertPanel.add(insertBtn);
 
-        // Ред за редактиране и изтриване
         JPanel editPanel = new JPanel();
         JTextField editField = new JTextField(20);
         JButton updateBtn = new JButton("Редактирай");
@@ -63,10 +67,8 @@ public class GenrePanel extends JPanel {
 
         // --- БУТОНИ ---
 
-        // Покажи всички
         showAllBtn.addActionListener(e -> loadData());
 
-        // Търсене
         searchBtn.addActionListener(e -> {
             String keyword = searchField.getText().trim();
             if (keyword.isEmpty()) {
@@ -80,7 +82,6 @@ public class GenrePanel extends JPanel {
             }
         });
 
-        // Добави
         insertBtn.addActionListener(e -> {
             String name = nameField.getText().trim();
             if (name.isEmpty()) {
@@ -92,7 +93,6 @@ public class GenrePanel extends JPanel {
             loadData();
         });
 
-        // Редактирай
         updateBtn.addActionListener(e -> {
             int selectedRow = table.getSelectedRow();
             if (selectedRow == -1) {
@@ -110,7 +110,6 @@ public class GenrePanel extends JPanel {
             loadData();
         });
 
-        // Изтрий
         deleteBtn.addActionListener(e -> {
             int selectedRow = table.getSelectedRow();
             if (selectedRow == -1) {
@@ -125,11 +124,9 @@ public class GenrePanel extends JPanel {
             }
         });
 
-        // Зареди данните при отваряне
         loadData();
     }
 
-    // Зарежда всички жанрове в таблицата
     private void loadData() {
         tableModel.setRowCount(0);
         List<Genre> genres = genreDAO.getAll();

@@ -9,7 +9,6 @@ import java.util.List;
 
 public class DirectorDAO {
 
-    // Взима всички режисьори от базата данни
     public List<Director> getAll() {
         List<Director> directors = new ArrayList<>();
         try (Connection conn = DBConnection.getConnection();
@@ -28,7 +27,6 @@ public class DirectorDAO {
         return directors;
     }
 
-    // Добавя нов режисьор
     public void insert(String name) {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
@@ -41,7 +39,6 @@ public class DirectorDAO {
         }
     }
 
-    // Променя името на режисьор
     public void update(int directorId, String newName) {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
@@ -55,7 +52,6 @@ public class DirectorDAO {
         }
     }
 
-    // Изтрива режисьор по ID
     public void delete(int directorId) {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
@@ -68,7 +64,6 @@ public class DirectorDAO {
         }
     }
 
-    // Търси режисьор по име
     public List<Director> searchByName(String name) {
         List<Director> directors = new ArrayList<>();
         try (Connection conn = DBConnection.getConnection();

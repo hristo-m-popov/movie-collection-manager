@@ -10,6 +10,7 @@ public class DBInitializer {
         try (Connection connection =
                      DBConnection.getConnection();
 
+        	// изпраща SQL команди към базата
              Statement statement =
                      connection.createStatement()) {
 
@@ -66,7 +67,8 @@ public class DBInitializer {
                             ON DELETE CASCADE
                     );
                     """;
-
+            
+            // изпращаме командите към БД
             statement.execute(createGenresTable);
             statement.execute(createDirectorsTable);
             statement.execute(createMoviesTable);

@@ -28,7 +28,6 @@ public class DirectorPanel extends JPanel {
         // --- ДОЛНА ЧАСТ ---
         JPanel bottomPanel = new JPanel(new GridLayout(3, 1));
 
-        // Ред за търсене
         JPanel searchPanel = new JPanel();
         searchField = new JTextField(20);
         JButton searchBtn = new JButton("Търси");
@@ -38,7 +37,6 @@ public class DirectorPanel extends JPanel {
         searchPanel.add(searchBtn);
         searchPanel.add(showAllBtn);
 
-        // Ред за добавяне
         JPanel insertPanel = new JPanel();
         JTextField nameField = new JTextField(20);
         JButton insertBtn = new JButton("Добави");
@@ -46,7 +44,6 @@ public class DirectorPanel extends JPanel {
         insertPanel.add(nameField);
         insertPanel.add(insertBtn);
 
-        // Ред за редактиране и изтриване
         JPanel editPanel = new JPanel();
         JTextField editField = new JTextField(20);
         JButton updateBtn = new JButton("Редактирай");
@@ -63,10 +60,8 @@ public class DirectorPanel extends JPanel {
 
         // --- БУТОНИ ---
 
-        // Покажи всички
         showAllBtn.addActionListener(e -> loadData());
 
-        // Търсене
         searchBtn.addActionListener(e -> {
             String keyword = searchField.getText().trim();
             if (keyword.isEmpty()) {
@@ -80,7 +75,6 @@ public class DirectorPanel extends JPanel {
             }
         });
 
-        // Добави
         insertBtn.addActionListener(e -> {
             String name = nameField.getText().trim();
             if (name.isEmpty()) {
@@ -92,7 +86,6 @@ public class DirectorPanel extends JPanel {
             loadData();
         });
 
-        // Редактирай
         updateBtn.addActionListener(e -> {
             int selectedRow = table.getSelectedRow();
             if (selectedRow == -1) {
@@ -110,7 +103,6 @@ public class DirectorPanel extends JPanel {
             loadData();
         });
 
-        // Изтрий
         deleteBtn.addActionListener(e -> {
             int selectedRow = table.getSelectedRow();
             if (selectedRow == -1) {
@@ -125,7 +117,6 @@ public class DirectorPanel extends JPanel {
             }
         });
 
-        // Зареди данните при отваряне
         loadData();
     }
 
