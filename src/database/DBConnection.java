@@ -12,7 +12,7 @@ public class DBConnection {
         	// зарежда H2 драйвера в паметта
             Class.forName("org.h2.Driver");
             conn = DriverManager.getConnection(
-                "jdbc:h2:C:\\Users\\Lenovo\\MovieDB\\movie_collection", 
+                "jdbc:h2:./movie_collection", 
                 "sa", 
                 ""
             );
